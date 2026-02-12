@@ -1,0 +1,7 @@
+<% if (item.stock_quantity > 10) { %>
+    <span class="product-badge in-stock">In Stock</span>
+  <% } else if (item.stock_quantity > 0) { %>
+    <span class="product-badge low-stock">Low Stock</span>
+  <% } else { %>
+    <span class="product-badge">Out of Stock</span>
+<% } %>

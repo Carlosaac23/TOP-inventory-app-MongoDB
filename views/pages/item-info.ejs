@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= item.model %> - <%= itemNameSingular %> Details</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <%- include('../partials/header.ejs') %>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">🛤️ <%= item.model %></h1>
+      <p class="page-subtitle">Model #<%= item.model_id %></p>
+    </div>
+
+    <article class="product-card">
+      <div class="product-image">
+        <img class="info-image" src="<%= item.image_url %>" alt="<%= item.model %> scale model">
+        <%- include('../partials/stock-span.ejs', { item }) %>
+      </div>
+
+      <div class="product-content">
+        <div class="product-category"><%= itemNameSingular %></div>
+        <div class="product-btns">
+          <h2 class="product-name"><%= item.model %></h2>
+          <button class="btn btn-secondary">
+            <a href="<%= item.id %>/update" style="text-decoration: none; color: inherit">Edit</a>
+          </button>
+        </div>
+        <p class="product-model">Model #<%= item.model_id %></p>
+        <p class="product-description"><%= item.description %></p>
+
+        <%- include('../partials/meta-items.ejs', { item }) %>
+
+        <div class="product-footer">
+          <span class="product-price">$<%= item.price %></span>
+          <span class="product-stock"><%= item.stock_quantity %> available</span>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="/<%= path %>">Back to <%= itemNamePlural %></a>
+          <a class="btn btn-outline" href="/">Return Home</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>

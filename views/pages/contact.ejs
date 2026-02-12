@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Railway Models</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="page">
+    <%- include('../partials/header.ejs') %>
+
+    <main class="container">
+      <header class="page-header">
+        <h1 class="page-title">Contact Us</h1>
+        <p class="page-subtitle">
+          We're happy to help with layouts, orders, or recommendations.
+        </p>
+      </header>
+
+      <section class="info-grid">
+        <div class="info-card">
+          <h2 class="info-title">Email</h2>
+          <p class="info-text">support@railwaymodels.com</p>
+        </div>
+
+        <div class="info-card">
+          <h2 class="info-title">Phone</h2>
+          <p class="info-text">+1 (555) 014-8300</p>
+        </div>
+
+        <div class="info-card">
+          <h2 class="info-title">Hours</h2>
+          <p class="info-text">Mon-Fri, 9:00 AM - 6:00 PM</p>
+        </div>
+      </section>
+
+      <section class="cta-panel">
+        <div class="cta-content">
+          <h2 class="cta-title">Need help picking a model?</h2>
+          <p class="cta-text">
+            Tell us your scale and layout size — we'll suggest great options.
+          </p>
+        </div>
+        <a class="btn btn-secondary" href="/trains">Shop Trains</a>
+      </section>
+    </main>
+
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>

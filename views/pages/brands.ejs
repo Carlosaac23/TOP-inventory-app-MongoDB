@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brands - Railway Model Inventory</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <%- include('../partials/header.ejs') %>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">🏭 Brands</h1>
+      <p class="page-subtitle">Trusted manufacturers behind the finest models</p>
+    </div>
+
+    <% if (brands && brands.length > 0) { %>
+      <div class="product-grid">
+        <% brands.forEach(brand => { %>
+          <article class="product-card">
+            <img class="product-image" src="<%= brand.logo_url %>" alt="<%= brand.name %> logo">
+            <div class="product-content">
+              <div class="product-category">Manufacturer</div>
+              <h2 class="product-name"><%= brand.name %></h2>
+              <p class="product-description">
+                Building reliable models for collectors and hobbyists worldwide.
+              </p>
+
+              <div class="product-meta">
+                <span class="meta-item">🌍 <%= brand.country %></span>
+                <span class="meta-item">📆 Founded <%= brand.foundation %></span>
+              </div>
+
+              <div class="product-footer">
+                <span class="product-stock">Brand ID: <%= brand.id %></span>
+              </div>
+            </div>
+          </article>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <div class="empty-state">
+        <div class="empty-state-icon">🏭</div>
+        <h2 class="empty-state-title">No Brands Found</h2>
+        <p class="empty-state-message">We couldn't find any brands in our catalog. Check back soon!</p>
+        <a href="/" class="btn btn-secondary">Return Home</a>
+      </div>
+    <% } %>
+  </main>
+
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>

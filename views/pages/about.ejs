@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Railway Models</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="page">
+    <%- include('../partials/header.ejs') %>
+
+    <main class="container">
+      <header class="page-header">
+        <h1 class="page-title">About Railway Models</h1>
+        <p class="page-subtitle">
+          Built for hobbyists, curated by enthusiasts.
+        </p>
+      </header>
+
+      <section class="info-grid">
+        <div class="info-card">
+          <h2 class="info-title">Our Story</h2>
+          <p class="info-text">
+            Railway Models started as a tiny workshop dedicated to restoring
+            classic locomotives. Today we curate a carefully selected collection
+            of trains, wagons, and tracks for every scale.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h2 class="info-title">What We Believe</h2>
+          <p class="info-text">
+            Great layouts are built with patience, good tools, and trustworthy
+            models. We only stock brands we'd proudly use on our own shelves.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h2 class="info-title">Community First</h2>
+          <p class="info-text">
+            From beginners to collectors, we love helping people build something
+            they're proud to display and run.
+          </p>
+        </div>
+      </section>
+
+      <section class="cta-panel">
+        <div class="cta-content">
+          <h2 class="cta-title">Come ride with us</h2>
+          <p class="cta-text">
+            Explore hand-picked models and accessories for every layout.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="/trains">Browse Collection</a>
+      </section>
+    </main>
+
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>

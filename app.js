@@ -6,6 +6,7 @@ import express from 'express';
 
 import connectDB from './db/client.js';
 import { generalRoute } from './routes/generalRoutes.js';
+import { trainRoutes } from './routes/trainRoutes.js';
 
 connectDB();
 const app = express();
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', generalRoute);
+app.use('/trains', trainRoutes);
 
 app.listen(PORT, error => {
   if (error) throw error;

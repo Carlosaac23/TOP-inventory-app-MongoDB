@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Railway Model Inventory - Home</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include('./partials/header.ejs') %>
+
+    <!-- Main Content -->
+    <main class="container">
+      <!-- Hero Section -->
+      <section class="hero">
+        <h1 class="hero-title">🚂 Welcome to Railway Models</h1>
+        <p class="hero-subtitle">
+          Your premier destination for quality model trains, wagons, and tracks
+        </p>
+        <div class="hero-buttons">
+          <a
+            href="/trains"
+            class="btn btn-primary"
+            style="font-size: 1.6rem; padding: 1.2rem 2.4rem"
+          >
+            Browse Collection
+          </a>
+          <a
+            href="/brands"
+            class="btn btn-outline"
+            style="
+              font-size: 1.6rem;
+              padding: 1.2rem 2.4rem;
+              border-color: white;
+              color: white;
+            "
+          >
+            View Brands
+          </a>
+        </div>
+      </section>
+
+      <!-- Categories -->
+      <section class="categories">
+        <a href="/trains" class="category-card">
+          <div class="category-icon">🚂</div>
+          <h2 class="category-title">Locomotives</h2>
+          <p class="category-description">
+            Steam, diesel, and electric trains from top manufacturers
+          </p>
+          <p class="category-count">View Collection →</p>
+        </a>
+
+        <a href="/wagons" class="category-card">
+          <div class="category-icon">🚃</div>
+          <h2 class="category-title">Wagons</h2>
+          <p class="category-description">
+            Passenger coaches, freight cars, and specialty wagons
+          </p>
+          <p class="category-count">View Collection →</p>
+        </a>
+
+        <a href="/tracks" class="category-card">
+          <div class="category-icon">🛤️</div>
+          <h2 class="category-title">Tracks</h2>
+          <p class="category-description">
+            Straight, curved, and switch tracks for your layout
+          </p>
+          <p class="category-count">View Collection →</p>
+        </a>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features">
+        <h2 class="features-title">Why Choose Us?</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">✨</div>
+            <h3 class="feature-title">Premium Quality</h3>
+            <p class="feature-text">
+              Only the finest models from trusted brands
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📦</div>
+            <h3 class="feature-title">Fast Shipping</h3>
+            <p class="feature-text">Quick and secure delivery worldwide</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">💰</div>
+            <h3 class="feature-title">Best Prices</h3>
+            <p class="feature-text">Competitive pricing on all products</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <h3 class="feature-title">Warranty</h3>
+            <p class="feature-text">
+              All items backed by manufacturer warranty
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+  </body>
+</html>

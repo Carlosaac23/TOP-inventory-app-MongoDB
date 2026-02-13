@@ -8,6 +8,7 @@ import methodOverride from 'method-override';
 import connectDB from './db/client.js';
 import { generalRoute } from './routes/generalRoutes.js';
 import { trainRoutes } from './routes/trainRoutes.js';
+import { wagonRoutes } from './routes/wagonRoutes.js';
 
 connectDB();
 const app = express();
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 
 app.use('/', generalRoute);
 app.use('/trains', trainRoutes);
+app.use('/wagons', wagonRoutes);
 
 app.listen(PORT, error => {
   if (error) throw error;

@@ -16,8 +16,10 @@
     
     <%- include('../partials/meta-items.ejs', { item }) %>
 
+    <% const formatterUSD = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }) %>
+
     <div class="product-footer">
-      <span class="product-price">$<%= item.price %></span>
+      <span class="product-price"><%= formatterUSD.format(item.price) %></span>
       <span class="product-stock"><%= item.stock_quantity %> available</span>
     </div>
     

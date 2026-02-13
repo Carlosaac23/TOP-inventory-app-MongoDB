@@ -37,3 +37,19 @@ export async function getAllScales() {
 export async function getAllBrands() {
   return await database.collection('brands').find({}).toArray();
 }
+
+export async function addItem(collection, itemData) {
+  await database.collection(collection).insertOne(itemData);
+}
+
+export async function deleteItemById(collection, itemID) {
+  await database
+    .collection(collection)
+    .deleteOne({ _id: new ObjectId(itemID) });
+}
+
+export async function updateItemById(collection, itemID, updates) {
+  return await database
+    .collection(collection)
+    .updateOne({ _id: new ObjectId(itemID) }, { $set: updates });
+}

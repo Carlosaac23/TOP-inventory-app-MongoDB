@@ -1,0 +1,20 @@
+<div class="product-meta">
+  <span class="meta-item">
+    <% const brand = brands.find(brand => brand._id.toString() === item.brand_id.toString()); %>
+    <% if (brand) { %>
+      <p><%= brand.name %></p>
+    <% } %>
+  </span>
+  <span class="meta-item">
+    <% const scale = scales.find(scale => scale._id.toString() === item.scale_id.toString()); %>
+    <% if (scale) { %>
+      <p><%= scale.scale %></p>
+    <% } %>
+  </span>
+  <span class="meta-item">
+    <% const category = categories.find(category => category._id.toString() === item.category_id.toString()); %>
+    <% if (category) { %>
+      <p><%= category.name %></p>
+    <% } %>
+  </span>
+</div>

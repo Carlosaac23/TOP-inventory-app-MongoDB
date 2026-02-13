@@ -1,0 +1,32 @@
+<form class="filter-bar" method="GET" action="/<%= path %>">
+  <div>
+  <%- include('./filter.ejs', {
+    id: 'category',
+    label: 'Categories',
+    allLabel: 'All Categories',
+    items: categories,
+    valueKey: '_id',
+    textKey: 'name',
+    selectedValue: filters?.category
+  }) %>
+  <%- include('./filter.ejs', {
+    id: 'scale',
+    label: 'Scales',
+    allLabel: 'All Scales',
+    items: scales,
+    valueKey: '_id',
+    textKey: 'scale',
+    selectedValue: filters?.scale
+  }) %>
+  <%- include('./filter.ejs', {
+    id: 'brand',
+    label: 'Brands',
+    allLabel: 'All Brands',
+    items: brands,
+    valueKey: '_id',
+    textKey: 'name',
+    selectedValue: filters?.brand
+  }) %>
+  </div>
+  <button class="btn btn-secondary" type="submit">Apply</button>
+</form>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error - Railway Models</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page">
+  <%- include('./partials/header.ejs') %>
+
+  <main class="container">
+    <div class="empty-state">
+      <div class="empty-state-icon">⚠️</div>
+      <h1 class="empty-state-title"><%= message || 'Something went wrong' %></h1>
+      
+      <% if (error && error.details) { %>
+        <p class="empty-state-message"><%= error.details %></p>
+      <% } else { %>
+        <p class="empty-state-message">
+          We're sorry, but something unexpected happened. Please try again.
+        </p>
+      <% } %>
+
+      <!-- Show stack trace only in development -->
+      <% if (error && error.stack && process.env.NODE_ENV === 'development') { %>
+        <div style="margin-top: 2rem; padding: 1rem; background: #f5f5f5; border-radius: 8px; text-align: left;">
+          <h3 style="margin-bottom: 1rem; color: #c0392b;">Debug Info (Development Only):</h3>
+          <pre style="overflow-x: auto; font-size: 1.2rem;"><%= error.stack %></pre>
+        </div>
+      <% } %>
+
+      <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
+        <a href="/" class="btn btn-primary">Return Home</a>
+      </div>
+    </div>
+  </main>
+
+  <%- include('./partials/footer.ejs') %>
+</body>
+</html>

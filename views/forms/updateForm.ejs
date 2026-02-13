@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit <%= title %> - <%= item.model %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page">
+  <%- include('../partials/header.ejs') %>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">Edit <%= title %></h1>
+      <p class="page-subtitle">Update details for <%= item.model %></p>
+    </div>
+
+    <form class="form-card" action="/<%= path %>/<%= item._id.toString() %>/update?_method=PUT" method="POST">
+      <div class="form-grid">
+        <div class="form-field">
+          <label class="form-label" for="model">Model</label>
+          <input class="form-input" type="text" name="model" id="model" value="<%= item.model %>" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="model_id">Model ID</label>
+          <input class="form-input" type="text" name="model_id" id="model_id" value="<%= item.model_id %>" required>
+        </div>
+
+        <div class="form-field form-field--full">
+          <label class="form-label" for="description">Description</label>
+          <textarea class="form-textarea" name="description" id="description" rows="6" required><%= item.description %></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="category_id">Category</label>
+          <select class="form-select" name="category_id" id="category_id" required>
+            <option value="" disabled>Select a category</option>
+            <% categories.forEach(category => { %>
+              <option value="<%= category._id.toString() %>" <%= category._id.toString() === item.category_id.toString() ? 'selected' : '' %>>
+                <%= category.name %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+         <div class="form-field">
+          <label class="form-label" for="scale_id">Scale</label>
+          <select class="form-select" name="scale_id" id="scale_id" required>
+            <option value="" disabled>Select a scale</option>
+            <% scales.forEach(scale => { %>
+              <option value="<%= scale._id.toString() %>" <%= scale._id.toString() === item.scale_id.toString() ? 'selected' : '' %>>
+                <%= scale.scale %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="brand_id">Brand</label>
+          <select class="form-select" name="brand_id" id="brand_id" required>
+            <option value="" disabled>Select a brand</option>
+            <% brands.forEach(brand => { %>
+              <option value="<%= brand._id.toString() %>" <%= brand._id.toString() === item.brand_id.toString() ? 'selected' : '' %>>
+                <%= brand.name %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="price">Price</label>
+          <input class="form-input" type="number" name="price" id="price" step="0.01" min="0" value="<%= item.price %>" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="stock_quantity">Stock Quantity</label>
+          <input class="form-input" type="number" name="stock_quantity" id="stock_quantity" min="0" value="<%= item.stock_quantity %>" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="adminPassword">Admin Password</label>
+          <input class="form-input" type="password" name="adminPassword" id="adminPassword" required>
+        </div>
+
+        <div class="form-field form-field--full">
+          <label class="form-label" for="image_url">Image URL</label>
+          <input class="form-input" type="text" name="image_url" id="image_url" value="<%= item.image_url %>">
+        </div>
+      </div>
+
+      <div class="form-actions edit">
+        <div>
+          <button class="btn btn-outline" type="submit">Save Changes</button>
+          <a class="btn btn-primary" href="/<%= path %>">Cancel</a>
+        </div>
+        <div class="danger-zone">
+          <p>Danger Zone</p>
+          <button class="btn btn-danger" form="delete-item-form" onclick="return confirm('Are you sure you wan to delete <%= item.model %>')" type="submit">Delete</button>
+        </div>
+      </div>
+    </form>
+    <form id="delete-item-form" action="/<%= path %>/<%= item._id.toString() %>/delete?_method=DELETE" method="POST">
+    </form>
+  </main>
+
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>

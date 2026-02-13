@@ -1,0 +1,37 @@
+<header class="header">
+  <div class="nav-container">
+    <a href="/" class="logo">Railway Models</a>
+    <nav>
+      <ul class="nav-links">
+        <li>
+          <a
+            href="/trains"
+            class="<%= currentPath.startsWith('/trains') ? 'active' : '' %>"
+            >Trains</a
+          >
+        </li>
+        <li>
+          <a
+            href="/wagons"
+            class="<%= currentPath.startsWith('/wagons') ? 'active' : '' %>"
+            >Wagons</a
+          >
+        </li>
+        <li>
+          <a
+            href="/tracks"
+            class="<%= currentPath.startsWith('/tracks') ? 'active' : '' %>"
+            >Tracks</a
+          >
+        </li>
+        <li>
+          <a
+            href="/brands"
+            class="<%= currentPath.startsWith('/brands') ? 'active' : '' %>"
+            >Brands</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

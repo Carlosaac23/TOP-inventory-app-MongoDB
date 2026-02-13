@@ -26,7 +26,7 @@
         <div class="product-btns">
           <h2 class="product-name"><%= item.model %></h2>
           <button class="btn btn-secondary">
-            <a href="<%= item.id %>/update" style="text-decoration: none; color: inherit">Edit</a>
+            <a href="<%= item._id.toString() %>/update" style="text-decoration: none; color: inherit">Edit</a>
           </button>
         </div>
         <p class="product-model">Model #<%= item.model_id %></p>

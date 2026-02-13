@@ -1,10 +1,12 @@
 import { ObjectId } from 'mongodb';
 
 import { client } from './client.js';
+import { validateCategoryType, validateCollectionName } from './safeQuery.js';
 
 const database = client.db('Inventory');
 
 export async function getAllItems(collection, { category, scale, brand }) {
+  validateCollectionName(collection);
   const filter = {};
 
   if (category) {
@@ -21,12 +23,16 @@ export async function getAllItems(collection, { category, scale, brand }) {
 }
 
 export async function getItemById(collection, id) {
+  validateCollectionName(collection);
+
   return await database
     .collection(collection)
     .findOne({ _id: new ObjectId(id) });
 }
 
 export async function getCategoriesByType(item) {
+  validateCategoryType(item);
+
   return await database.collection(`${item}_categories`).find({}).toArray();
 }
 
@@ -39,16 +45,22 @@ export async function getAllBrands() {
 }
 
 export async function addItem(collection, itemData) {
+  validateCollectionName(collection);
+
   await database.collection(collection).insertOne(itemData);
 }
 
 export async function deleteItemById(collection, itemID) {
+  validateCollectionName(collection);
+
   await database
     .collection(collection)
     .deleteOne({ _id: new ObjectId(itemID) });
 }
 
 export async function updateItemById(collection, itemID, updates) {
+  validateCollectionName(collection);
+
   return await database
     .collection(collection)
     .updateOne({ _id: new ObjectId(itemID) }, { $set: updates });

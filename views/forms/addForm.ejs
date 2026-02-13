@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add <%= title %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page">
+  <%- include('../partials/header.ejs') %>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">Add <%= title %></h1>
+      <p class="page-subtitle">Create a new <%= title.toLowerCase() %> entry</p>
+    </div>
+
+    <form class="form-card" action="/<%= path %>/add" method="POST">
+      <div class="form-grid">
+        <div class="form-field">
+          <label class="form-label" for="model">Model</label>
+          <input class="form-input" type="text" name="model" id="model" placeholder="<%= title %> name" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="model_id">Model ID</label>
+          <input class="form-input" type="text" name="model_id" id="model_id" placeholder="e.g 10004" required>
+        </div>
+
+        <div class="form-field form-field--full">
+          <label class="form-label" for="description">Description</label>
+          <textarea class="form-textarea" name="description" id="description" rows="6" placeholder="Description about the <%= title.toLowerCase() %>" required></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="category_id">Category</label>
+          <select class="form-select" name="category_id" id="category_id" required>
+            <option value="" disabled selected>Select a category</option>
+            <% categories.forEach(category => { %>
+              <option value="<%= category._id.toString() %>"><%= category.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="scale_id">Scale</label>
+          <select class="form-select" name="scale_id" id="scale_id" required>
+            <option value="" disabled selected>Select a scale</option>
+            <% scales.forEach(scale => { %>
+              <option value="<%= scale._id.toString() %>"><%= scale.scale %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="brand_id">Brand</label>
+          <select class="form-select" name="brand_id" id="brand_id" required>
+            <option value="" disabled selected>Select a brand</option>
+            <% brands.forEach(brand => { %>
+              <option value="<%= brand._id.toString() %>"><%= brand.name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="price">Price</label>
+          <input class="form-input" type="number" name="price" id="price" step="0.01" min="0" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="stock_quantity">Stock Quantity</label>
+          <input class="form-input" type="number" name="stock_quantity" id="stock_quantity" min="0" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="adminPassword">Admin Password</label>
+          <input class="form-input" type="password" name="adminPassword" id="adminPassword" required>
+        </div>
+
+        <div class="form-field form-field--full">
+          <label class="form-label" for="image_url">Image URL</label>
+          <input class="form-input" type="text" name="image_url" id="image_url" placeholder="Enter here your <%= title.toLowerCase() %> image URL">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-outline" type="submit">Create</button>
+        <a class="btn btn-primary" href="/<%= path %>">Cancel</a>
+      </div>
+    </form>
+  </main>
+
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>

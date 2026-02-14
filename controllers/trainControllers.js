@@ -4,11 +4,10 @@ import {
   getAllItems,
   getItemById,
   getCategoriesByType,
-  getAllScales,
-  getAllBrands,
   addItem,
   updateItemById,
   deleteItemById,
+  getBrandsAndScales,
 } from '../db/queries.js';
 
 export async function getAllTrainsController(req, res) {
@@ -17,8 +16,7 @@ export async function getAllTrainsController(req, res) {
 
     const trains = await getAllItems('trains', { category, scale, brand });
     const categories = await getCategoriesByType('train');
-    const scales = await getAllScales();
-    const brands = await getAllBrands();
+    const { scales, brands } = await getBrandsAndScales();
 
     res.render('pages/items-collection', {
       itemNamePlural: 'Trains',
@@ -52,8 +50,7 @@ export async function getTrainByIdController(req, res) {
     }
 
     const categories = await getCategoriesByType('train');
-    const scales = await getAllScales();
-    const brands = await getAllBrands();
+    const { scales, brands } = await getBrandsAndScales();
 
     res.render('pages/item-info', {
       itemNamePlural: 'Trains',
@@ -76,8 +73,7 @@ export async function getTrainByIdController(req, res) {
 export async function getAddFormController(req, res) {
   try {
     const categories = await getCategoriesByType('train');
-    const scales = await getAllScales();
-    const brands = await getAllBrands();
+    const { scales, brands } = await getBrandsAndScales();
 
     res.render('forms/addForm', {
       title: 'Train',
@@ -144,8 +140,7 @@ export async function getUpdateFormController(req, res) {
     }
 
     const categories = await getCategoriesByType('train');
-    const scales = await getAllScales();
-    const brands = await getAllBrands();
+    const { scales, brands } = await getBrandsAndScales();
 
     res.render('forms/updateForm', {
       title: 'Train',

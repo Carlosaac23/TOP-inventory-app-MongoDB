@@ -3,8 +3,7 @@ import { ObjectId } from 'mongodb';
 import {
   getAllItems,
   getCategoriesByType,
-  getAllScales,
-  getAllBrands,
+  getBrandsAndScales,
   addItem,
   getItemById,
   updateItemById,
@@ -17,8 +16,7 @@ export async function getAllWagonsController(req, res) {
 
     const wagons = await getAllItems('wagons', { category, scale, brand });
     const categories = await getCategoriesByType('wagon');
-    const scales = await getAllScales();
-    const brands = await getAllBrands();
+    const { brands, scales } = await getBrandsAndScales();
 
     res.render('pages/items-collection', {
       itemNamePlural: 'Wagons',
@@ -52,8 +50,7 @@ export async function getWagonByIdController(req, res) {
     }
 
     const categories = await getCategoriesByType('wagon');
-    const scales = await getAllScales();
-    const brands = await getAllBrands();
+    const { brands, scales } = await getBrandsAndScales();
 
     res.render('pages/item-info', {
       itemNamePlural: 'Wagons',
@@ -76,8 +73,7 @@ export async function getWagonByIdController(req, res) {
 export async function getAddFormController(req, res) {
   try {
     const categories = await getCategoriesByType('wagon');
-    const scales = await getAllScales();
-    const brands = await getAllBrands();
+    const { brands, scales } = await getBrandsAndScales();
 
     res.render('forms/addForm', {
       title: 'Wagon',
@@ -144,8 +140,7 @@ export async function getUpdateFormController(req, res) {
     }
 
     const categories = await getCategoriesByType('wagon');
-    const scales = await getAllScales();
-    const brands = await getAllBrands();
+    const { brands, scales } = await getBrandsAndScales();
 
     res.render('forms/updateForm', {
       title: 'Wagon',

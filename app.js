@@ -7,6 +7,7 @@ import methodOverride from 'method-override';
 
 import connectDB from './db/client.js';
 import { generalRoute } from './routes/generalRoutes.js';
+import { trackRoutes } from './routes/trackRoutes.js';
 import { trainRoutes } from './routes/trainRoutes.js';
 import { wagonRoutes } from './routes/wagonRoutes.js';
 
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 app.use('/', generalRoute);
 app.use('/trains', trainRoutes);
 app.use('/wagons', wagonRoutes);
+app.use('/tracks', trackRoutes);
 
 app.listen(PORT, error => {
   if (error) throw error;

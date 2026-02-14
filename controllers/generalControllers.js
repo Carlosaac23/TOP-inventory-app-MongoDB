@@ -1,4 +1,4 @@
-import { getAllBrands } from '../db/queries.js';
+import { addBrand, addScale, getBrandsAndScales } from '../db/queries.js';
 
 export function getHomepage(req, res) {
   res.render('index');
@@ -21,7 +21,51 @@ export function getReturnsPage(req, res) {
 }
 
 export async function getBrandsPage(req, res) {
-  const brands = await getAllBrands();
+  const { _scales, brands } = await getBrandsAndScales();
 
   res.render('pages/brands', { brands });
+}
+
+export function getAddFormController(req, res) {
+  res.render('forms/addBrandScaleForm');
+}
+
+export async function postAddFormController(req, res) {
+  try {
+    const {
+      entityType,
+      brandName,
+      country,
+      foundation,
+      logo_url,
+      scale,
+      ratio,
+      track_width,
+    } = req.body;
+
+    if (entityType === 'brand') {
+      await addBrand({
+        name: brandName,
+        country,
+        foundation: Number(foundation),
+        logo_url,
+      });
+    }
+
+    if (entityType === 'scale') {
+      await addScale({
+        scale,
+        ratio,
+        track_width,
+      });
+    }
+
+    return res.redirect('/brands');
+  } catch (error) {
+    console.error('Controller error:', error);
+    res.status(500).render('error', {
+      message: 'Error adding brand or scale',
+      error: process.env.NODE_ENV === 'development' ? error : {},
+    });
+  }
 }

@@ -36,18 +36,26 @@ export async function getCategoriesByType(item) {
   return await database.collection(`${item}_categories`).find({}).toArray();
 }
 
-export async function getAllScales() {
-  return await database.collection('scales').find({}).toArray();
-}
-
-export async function getAllBrands() {
-  return await database.collection('brands').find({}).toArray();
+export async function getBrandsAndScales() {
+  const [scales, brands] = await Promise.all([
+    database.collection('scales').find({}).toArray(),
+    database.collection('brands').find({}).toArray(),
+  ]);
+  return { scales, brands };
 }
 
 export async function addItem(collection, itemData) {
   validateCollectionName(collection);
 
   await database.collection(collection).insertOne(itemData);
+}
+
+export async function addBrand(brandData) {
+  await database.collection('brands').insertOne(brandData);
+}
+
+export async function addScale(scaleData) {
+  await database.collection('scales').insertOne(scaleData);
 }
 
 export async function deleteItemById(collection, itemID) {

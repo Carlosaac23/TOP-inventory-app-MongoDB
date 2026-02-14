@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Brand or Scale</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="page">
+  <%- include('../partials/header.ejs') %>
+
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">Add Brand or Scale</h1>
+      <p class="page-subtitle">Select what you want to create and fill only that form</p>
+    </div>
+
+    <form class="form-card" action="/add" method="POST">
+      <div class="form-grid">
+        <div class="form-field form-field--full">
+          <label class="form-label" for="entityType">What do you want to add?</label>
+          <select class="form-select" name="entityType" id="entityType" required>
+            <option value="" selected disabled>Select an option</option>
+            <option value="brand">Brand</option>
+            <option value="scale">Scale</option>
+          </select>
+        </div>
+
+        <div id="brandFields" class="form-grid" hidden>
+          <div class="form-field">
+            <label class="form-label" for="brandName">Brand Name</label>
+            <input class="form-input" type="text" name="brandName" id="brandName" placeholder="e.g. Bachmann">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="country">Country</label>
+            <input class="form-input" type="text" name="country" id="country" placeholder="e.g. Germany">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="foundation">Foundation Year</label>
+            <input class="form-input" type="number" name="foundation" id="foundation" min="1800" max="2100" placeholder="e.g. 1833">
+          </div>
+
+          <div class="form-field form-field--full">
+            <label class="form-label" for="logo_url">Logo URL</label>
+            <input class="form-input" type="text" name="logo_url" id="logo_url" placeholder="https://example.com/logo.png">
+          </div>
+        </div>
+
+        <div id="scaleFields" class="form-grid" hidden>
+          <div class="form-field">
+            <label class="form-label" for="scale">Scale</label>
+            <input class="form-input" type="text" name="scale" id="scale" placeholder="e.g. HO">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="ratio">Ratio</label>
+            <input class="form-input" type="text" name="ratio" id="ratio" placeholder="e.g. 1:87">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="track_width">Track Width</label>
+            <input class="form-input" type="text" name="track_width" id="track_width" placeholder="e.g. 16.5 mm">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="adminPassword">Admin Password</label>
+          <input class="form-input" type="password" name="adminPassword" id="adminPassword" required>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-outline" type="submit">Create</button>
+        <a class="btn btn-primary" href="/brands">Cancel</a>
+      </div>
+    </form>
+  </main>
+
+  <%- include('../partials/footer.ejs') %>
+
+  <script>
+    const entityTypeSelect = document.getElementById('entityType');
+    const brandFields = document.getElementById('brandFields');
+    const scaleFields = document.getElementById('scaleFields');
+
+    const brandInputIds = ['brandName', 'country', 'foundation', 'logo_url'];
+    const scaleInputIds = ['scale', 'ratio', 'track_width'];
+
+    function toggleFieldGroup(inputIds, enabled) {
+      inputIds.forEach(inputId => {
+        const field = document.getElementById(inputId);
+        field.disabled = !enabled;
+        field.required = enabled;
+      });
+    }
+
+    function updateFormByType(selectedType) {
+      const showBrand = selectedType === 'brand';
+      const showScale = selectedType === 'scale';
+
+      brandFields.hidden = !showBrand;
+      scaleFields.hidden = !showScale;
+
+      toggleFieldGroup(brandInputIds, showBrand);
+      toggleFieldGroup(scaleInputIds, showScale);
+    }
+
+    entityTypeSelect.addEventListener('change', event => {
+      updateFormByType(event.target.value);
+    });
+
+    updateFormByType(entityTypeSelect.value);
+  </script>
+</body>
+</html>

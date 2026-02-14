@@ -3,26 +3,26 @@ import { ObjectId } from 'mongodb';
 import {
   getAllItems,
   getCategoriesByType,
+  getItemById,
   getBrandsAndScales,
   addItem,
-  getItemById,
   updateItemById,
   deleteItemById,
 } from '../db/queries.js';
 
-export async function getAllWagonsController(req, res) {
+export async function getAllTracksController(req, res) {
   try {
     const { category, scale, brand } = req.query;
 
-    const wagons = await getAllItems('wagons', { category, scale, brand });
-    const categories = await getCategoriesByType('wagon');
-    const { brands, scales } = await getBrandsAndScales();
+    const tracks = await getAllItems('tracks', { category, scale, brand });
+    const categories = await getCategoriesByType('track');
+    const { scales, brands } = await getBrandsAndScales();
 
     res.render('pages/items-collection', {
-      itemNamePlural: 'Wagons',
-      itemNameSingular: 'Wagon',
-      path: 'wagons',
-      items: wagons,
+      itemNamePlural: 'Tracks',
+      itemNameSingular: 'Track',
+      path: 'tracks',
+      items: tracks,
       categories,
       scales,
       brands,
@@ -31,32 +31,32 @@ export async function getAllWagonsController(req, res) {
   } catch (error) {
     console.error('Controller error:', error);
     res.status(500).render('error', {
-      message: 'Unable to load wagons',
+      message: 'Unable to load tracks',
       error: process.env.NODE_ENV === 'development' ? error : {},
     });
   }
 }
 
-export async function getWagonByIdController(req, res) {
+export async function getTrackByIdController(req, res) {
   try {
-    const { wagonID } = req.params;
-    const wagon = await getItemById('wagons', wagonID);
+    const { trackID } = req.params;
+    const track = await getItemById('tracks', trackID);
 
-    if (!wagon) {
+    if (!track) {
       return res.status(404).render('error', {
-        message: 'Wagon not found',
-        error: { details: `No wagon found with ID ${wagonID}` },
+        message: 'Track not found',
+        error: { details: `No track found with ID ${trackID}` },
       });
     }
 
-    const categories = await getCategoriesByType('wagon');
-    const { brands, scales } = await getBrandsAndScales();
+    const categories = await getCategoriesByType('track');
+    const { scales, brands } = await getBrandsAndScales();
 
     res.render('pages/item-info', {
-      itemNamePlural: 'Wagons',
-      itemNameSingular: 'Wagon',
-      path: 'wagons',
-      item: wagon,
+      itemNamePlural: 'Tracks',
+      itemNameSingular: 'Track',
+      path: 'tracks',
+      item: track,
       categories,
       scales,
       brands,
@@ -64,7 +64,7 @@ export async function getWagonByIdController(req, res) {
   } catch (error) {
     console.error('Controller error:', error);
     res.status(500).render('error', {
-      message: 'Unable to load wagon',
+      message: 'Unable to load track',
       error: process.env.NODE_ENV === 'development' ? error : {},
     });
   }
@@ -72,12 +72,12 @@ export async function getWagonByIdController(req, res) {
 
 export async function getAddFormController(req, res) {
   try {
-    const categories = await getCategoriesByType('wagon');
-    const { brands, scales } = await getBrandsAndScales();
+    const categories = await getCategoriesByType('track');
+    const { scales, brands } = await getBrandsAndScales();
 
     res.render('forms/addForm', {
-      title: 'Wagon',
-      path: 'wagons',
+      title: 'Track',
+      path: 'tracks',
       categories,
       scales,
       brands,
@@ -105,7 +105,7 @@ export async function postAddFormController(req, res) {
       image_url,
     } = req.body;
 
-    await addItem('wagons', {
+    await addItem('tracks', {
       model,
       model_id,
       description,
@@ -117,11 +117,11 @@ export async function postAddFormController(req, res) {
       image_url,
     });
 
-    return res.redirect('/wagons');
+    return res.redirect('/tracks');
   } catch (error) {
     console.error('Controller error:', error);
     res.status(500).render('error', {
-      message: 'Error adding wagon',
+      message: 'Error adding track',
       error: process.env.NODE_ENV === 'development' ? error : {},
     });
   }
@@ -129,23 +129,23 @@ export async function postAddFormController(req, res) {
 
 export async function getUpdateFormController(req, res) {
   try {
-    const { wagonID } = req.params;
-    const wagon = await getItemById('wagons', wagonID);
+    const { trackID } = req.params;
+    const track = await getItemById('tracks', trackID);
 
-    if (!wagon) {
+    if (!track) {
       return res.status(404).render('error', {
-        message: 'Wagon not found',
-        error: { details: `Cannot update - wagon ${wagonID} does not exist` },
+        message: 'Track not found',
+        error: { details: `Cannot update - track ${trackID} does not exist` },
       });
     }
 
-    const categories = await getCategoriesByType('wagon');
-    const { brands, scales } = await getBrandsAndScales();
+    const categories = await getCategoriesByType('track');
+    const { scales, brands } = await getBrandsAndScales();
 
     res.render('forms/updateForm', {
-      title: 'Wagon',
-      item: wagon,
-      path: 'wagons',
+      title: 'Track',
+      item: track,
+      path: 'tracks',
       categories,
       scales,
       brands,
@@ -161,7 +161,7 @@ export async function getUpdateFormController(req, res) {
 
 export async function putUpdateFormController(req, res) {
   try {
-    const { wagonID } = req.params;
+    const { trackID } = req.params;
     const {
       model,
       model_id,
@@ -174,7 +174,7 @@ export async function putUpdateFormController(req, res) {
       image_url,
     } = req.body;
 
-    const updatedWagon = await updateItemById('wagons', wagonID, {
+    const updatedTrack = await updateItemById('tracks', trackID, {
       model,
       model_id,
       description,
@@ -186,33 +186,33 @@ export async function putUpdateFormController(req, res) {
       image_url,
     });
 
-    if (!updatedWagon) {
+    if (!updatedTrack) {
       return res.status(404).render('error', {
-        message: 'Wagon not found',
-        error: { details: `Cannot update - wagon ${wagonID} does no exist` },
+        message: 'Track not found',
+        error: { details: `Cannot update - track ${trackID} does not exist` },
       });
     }
 
-    return res.redirect(`/wagons/${wagonID}`);
+    return res.redirect(`/tracks/${trackID}`);
   } catch (error) {
     console.error('Controller error:', error);
     res.status(500).render('error', {
-      message: 'Error updating wagon',
+      message: 'Error updating track',
       error: process.env.NODE_ENV === 'development' ? error : {},
     });
   }
 }
 
-export async function deleteWagonController(req, res) {
+export async function deleteTrackController(req, res) {
   try {
-    const { wagonID } = req.params;
-    await deleteItemById('wagons', wagonID);
+    const { trackID } = req.params;
+    await deleteItemById('tracks', trackID);
 
-    return res.redirect('/wagons');
+    return res.redirect('/tracks');
   } catch (error) {
     console.error('Controller error:', error);
     res.status(500).render('error', {
-      message: 'Error deleting wagon',
+      message: 'Error deleting track',
       error: process.env.NODE_ENV === 'development' ? error : {},
     });
   }

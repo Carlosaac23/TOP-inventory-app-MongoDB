@@ -107,7 +107,7 @@ export async function postAddFormController(req, res) {
 
     await addItem('wagons', {
       model,
-      model_id,
+      model_id: Number(model_id),
       description,
       category_id: new ObjectId(category_id),
       scale_id: new ObjectId(scale_id),
@@ -176,7 +176,7 @@ export async function putUpdateFormController(req, res) {
 
     const updatedWagon = await updateItemById('wagons', wagonID, {
       model,
-      model_id,
+      model_id: Number(model_id),
       description,
       category_id: new ObjectId(category_id),
       scale_id: new ObjectId(scale_id),
